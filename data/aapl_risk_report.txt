@@ -21,9 +21,9 @@ A solicitação indica "None" para Setor, Indústria e Descrição da Empresa. C
 *   **Descrição (informação externa):** A Apple é reconhecida mundialmente por sua inovação, forte identidade de marca, ecossistema integrado de hardware e software, e uma base de clientes altamente leal. Sua estratégia foca em produtos premium, experiência do usuário e um crescente portfólio de serviços que complementam seus dispositivos. A empresa possui uma vasta cadeia de suprimentos global e uma presença de mercado dominante em várias categorias.
 
 ---
-
+google-genai
 ### 2. Análise dos Indicadores Financeiros
-
+google-genai
 Os indicadores fornecidos, embora limitados, permitem algumas observações críticas:
 
 *   **Current Ratio (0.8933):**

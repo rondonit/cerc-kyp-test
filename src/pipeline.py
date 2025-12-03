@@ -8,7 +8,9 @@ from risk_analyst_ollama import run_risk_agent as run_risk_agent_ollama
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Pipeline de geração de relatório de risco.")
+    parser = argparse.ArgumentParser(
+        description="Pipeline de geração de relatório de risco."
+    )
     parser.add_argument(
         "--model",
         choices=["ollama", "gemini"],
@@ -31,7 +33,9 @@ def main() -> None:
     company_ratios = compute_ratios(company_data)
     logger.debug("Rácios calculados: %s", company_ratios)
 
-    model_runner = run_risk_agent_gemini if args.model == "gemini" else run_risk_agent_ollama
+    model_runner = (
+        run_risk_agent_gemini if args.model == "gemini" else run_risk_agent_ollama
+    )
     logger.info("Chamando o modelo (%s) para gerar o relatório", args.model)
 
     risk_report = model_runner(company_data, company_ratios)

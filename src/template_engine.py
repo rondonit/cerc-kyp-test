@@ -1,5 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 
+
 def render_template(template_name: str, variables: dict) -> str:
     env = Environment(
         loader=FileSystemLoader("prompts"),

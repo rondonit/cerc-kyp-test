@@ -5,6 +5,7 @@ from template_engine import render_template
 
 logger = logging.getLogger(__name__)
 
+
 def run_risk_agent(
     company_data: dict,
     ratios: dict,
@@ -25,7 +26,9 @@ def run_risk_agent(
     logger.info("Enviando prompt para o modelo %s (chars=%d)", model, len(prompt))
 
     # Simplificado: não usamos streaming. Apenas indicar que o relatório está sendo gerado.
-    print(f"Gerando relatório de risco para {company_data.get('company_name')} ({company_data.get('company_ticker')})...")
+    print(
+        f"Gerando relatório de risco para {company_data.get('company_name')} ({company_data.get('company_ticker')})..."
+    )
 
     start = time.time()
     response = ollama.chat(model=model, messages=[{"role": "user", "content": prompt}])

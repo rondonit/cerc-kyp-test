@@ -21,7 +21,9 @@ def get_value(df: Any, row_names: List[str]) -> float:
             try:
                 return float(df.loc[name].iloc[0].item())
             except Exception:
-                logger.debug("Failed to parse value for row '%s'; trying next alias", name)
+                logger.debug(
+                    "Failed to parse value for row '%s'; trying next alias", name
+                )
                 continue  # try next alias
 
     logger.debug("Rows %s not found; returning 0.0", row_names)
@@ -63,13 +65,26 @@ def build_company_payload(symbol: str) -> Dict[str, Any]:
 
     metrics = {
         "total_assets": get_value(balance_sheet, ["Total Assets", "Total assets"]),
-        "total_liabilities": get_value(balance_sheet, ["Total Liab", "Total Liabilities Net Minority Interest"]),
-        "total_equity": get_value(balance_sheet, ["Total Stockholder Equity", "Total Equity Gross Minority Interest"]),
-        "current_assets": get_value(balance_sheet, ["Total Current Assets", "Current Assets"]),
-        "current_liabilities": get_value(balance_sheet, ["Total Current Liabilities", "Current Liabilities"]),
+        "total_liabilities": get_value(
+            balance_sheet, ["Total Liab", "Total Liabilities Net Minority Interest"]
+        ),
+        "total_equity": get_value(
+            balance_sheet,
+            ["Total Stockholder Equity", "Total Equity Gross Minority Interest"],
+        ),
+        "current_assets": get_value(
+            balance_sheet, ["Total Current Assets", "Current Assets"]
+        ),
+        "current_liabilities": get_value(
+            balance_sheet, ["Total Current Liabilities", "Current Liabilities"]
+        ),
         "total_revenue": get_value(income_statement, ["Total Revenue"]),
-        "net_income": get_value(income_statement, ["Net Income", "Net Income Common Stockholders"]),
-        "operating_cash_flow": get_value(cash_flow, ["Total Cash From Operating Activities", "Operating Cash Flow"]),
+        "net_income": get_value(
+            income_statement, ["Net Income", "Net Income Common Stockholders"]
+        ),
+        "operating_cash_flow": get_value(
+            cash_flow, ["Total Cash From Operating Activities", "Operating Cash Flow"]
+        ),
     }
 
     payload: Dict[str, Any] = {
