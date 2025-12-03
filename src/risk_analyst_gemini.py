@@ -1,6 +1,7 @@
 import time
 import os
 from dotenv import load_dotenv
+from data_normalization import normalize_company_data
 from template_engine import render_template
 import google.genai as genai
 
@@ -23,16 +24,13 @@ def _get_api_key() -> str:
 def run_risk_agent(
     company_data: dict,
     ratios: dict,
-    template_name: str = "risk_template.jinja",
+    template_name: str = "report_template.jinja",
     model: str = "gemini-2.5-flash",
 ) -> str:
+    company = normalize_company_data(company_data)
+
     variables = {
-        "company_name": company_data["company_name"],
-        "company_ticker": company_data["company_ticker"],
-        "sector": company_data.get("sector"),
-        "industry": company_data.get("industry"),
-        "website": company_data.get("website"),
-        "description": company_data.get("description"),
+        "company": company,
         "ratios": ratios,
     }
 
@@ -40,8 +38,8 @@ def run_risk_agent(
 
     # Apenas informar ao usuário (sem logs/streaming)
     print(
-        f"Gerando relatório de risco para {company_data.get('company_name')} "
-        f"({company_data.get('company_ticker')})..."
+        f"Gerando relatório de risco para {company.get('company_name')} "
+        f"({company.get('company_ticker')})..."
     )
 
     client = genai.Client(api_key=_get_api_key())

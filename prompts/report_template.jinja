@@ -1,0 +1,216 @@
+KYP_TECHNICAL_REPORT_TEMPLATE = r"""
+You are a senior **credit risk analyst** at a securitization and receivables infrastructure company.
+Your task is to assess the **credit and operational risk** of a company, focusing on how safe it is
+to buy or accept **receivables / duplicatas** originated by this company.
+
+Follow these rules strictly:
+
+1. **Be highly technical and concise.**
+2. **Base your opinion primarily on the quantitative metrics** provided below.
+3. Use the **business description** only as **secondary context** (business model, sector, industry).
+4. **Always comment explicitly on leverage, profitability and cash generation.**
+5. Provide a clear **risk rating** at the end (e.g. *Low*, *Moderate*, *High*).
+6. If any important metric is missing or zero, **call this out explicitly** as a data quality limitation.
+
+---
+
+## 1. Company Overview
+
+- **Name:** {{ company.company_name }} ({{ company.company_ticker }})
+- **Sector:** {{ company.sector or "N/A" }}
+- **Industry:** {{ company.industry or "N/A" }}
+- **Currency:** {{ company.currency or "N/A" }}
+- **Website:** {{ company.website or "N/A" }}
+
+**Business description (summary):**
+
+{{ company.description or "No description available." }}
+
+---
+
+## 2. Raw Financial Metrics (Last Available Period)
+
+{% set m = company.metrics %}
+
+### 2.1 Balance Sheet
+
+- **Total assets:** {{ m.total_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+- **Total liabilities:** {{ m.total_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+- **Total equity:** {{ m.total_equity | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+- **Current assets:** {{ m.current_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+- **Current liabilities:** {{ m.current_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+### 2.2 Income Statement
+
+- **Total revenue:** {{ m.total_revenue | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+- **Net income:** {{ m.net_income | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+### 2.3 Cash Flow
+
+- **Operating cash flow:** {{ m.operating_cash_flow | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+---
+
+## 3. Key Ratios for Risk Assessment (Computed from the metrics above)
+
+Use the ratios below as the **primary driver** of your risk assessment.
+
+{% set total_assets = m.total_assets or 0 %}
+{% set total_liabilities = m.total_liabilities or 0 %}
+{% set total_equity = m.total_equity or 0 %}
+{% set current_assets = m.current_assets or 0 %}
+{% set current_liabilities = m.current_liabilities or 0 %}
+{% set total_revenue = m.total_revenue or 0 %}
+{% set net_income = m.net_income or 0 %}
+{% set ocf = m.operating_cash_flow or 0 %}
+
+{# --- Basic ratios derived only from the metrics you currently have --- #}
+
+### 3.1 Leverage
+
+- **Debt to equity (approx. liabilities / equity):**
+  {% if total_equity != 0 %}
+  {{ (total_liabilities / total_equity) | round(2) }}
+  {% else %}
+  N/A (equity is zero or missing)
+  {% endif %}
+
+- **Assets to equity (financial leverage):**
+  {% if total_equity != 0 %}
+  {{ (total_assets / total_equity) | round(2) }}
+  {% else %}
+  N/A (equity is zero or missing)
+  {% endif %}
+
+- **Equity ratio (equity / assets):**
+  {% if total_assets != 0 %}
+  {{ (total_equity / total_assets * 100) | round(2) }}%
+  {% else %}
+  N/A (assets are zero or missing)
+  {% endif %}
+
+- **Liabilities ratio (liabilities / assets):**
+  {% if total_assets != 0 %}
+  {{ (total_liabilities / total_assets * 100) | round(2) }}%
+  {% else %}
+  N/A (assets are zero or missing)
+  {% endif %}
+
+**Technical analysis (leverage):**
+Explain, in technical terms, whether the capital structure indicates low, moderate, or high leverage risk
+for investors in receivables originated by this company.
+
+---
+
+### 3.2 Profitability
+
+- **Net margin (net income / revenue):**
+  {% if total_revenue != 0 %}
+  {{ (net_income / total_revenue * 100) | round(2) }}%
+  {% else %}
+  N/A (revenue is zero or missing)
+  {% endif %}
+
+- **Return on assets (ROA = net income / assets):**
+  {% if total_assets != 0 %}
+  {{ (net_income / total_assets * 100) | round(2) }}%
+  {% else %}
+  N/A (assets are zero or missing)
+  {% endif %}
+
+- **Return on equity (ROE = net income / equity):**
+  {% if total_equity != 0 %}
+  {{ (net_income / total_equity * 100) | round(2) }}%
+  {% else %}
+  N/A (equity is zero or missing)
+  {% endif %}
+
+**Technical analysis (profitability):**
+Discuss profitability in terms of capacity to generate earnings and absorb credit losses,
+avoiding generic comments.
+
+---
+
+### 3.3 Cash Generation
+
+- **OCF margin (operating cash flow / revenue):**
+  {% if total_revenue != 0 %}
+  {{ (ocf / total_revenue * 100) | round(2) }}%
+  {% else %}
+  N/A (revenue is zero or missing)
+  {% endif %}
+
+- **OCF coverage of liabilities (operating cash flow / total liabilities):**
+  {% if total_liabilities != 0 %}
+  {{ (ocf / total_liabilities) | round(2) }}
+  {% else %}
+  N/A (liabilities are zero or missing)
+  {% endif %}
+
+**Technical analysis (cash generation):**
+Evaluate the company’s ability to generate cash to support its operations and pay obligations,
+emphasizing capacity to support receivables / duplicatas programs.
+
+---
+
+{# -------------------------------------------------------------------
+   FUTURE / OPTIONAL RATIOS (COMMENTED FOR NOW)
+   When you implement these in Python, you can pass a "ratios" dict
+   and uncomment this section.
+------------------------------------------------------------------- #}
+
+{#
+### 3.4 Growth & Size (from extended metrics or external ratios)
+
+- **Revenue growth (YoY):** {{ (ratios.growth.revenue_growth * 100) | round(2) }}%
+- **Earnings growth (YoY):** {{ (ratios.growth.earnings_growth * 100) | round(2) }}%
+- **Market cap (USD):** {{ ratios.size.market_cap_usd | round(2) }}
+
+**Technical analysis (growth & size):**
+Comment on growth stability and business scale, and how this influences the robustness
+of receivables originated by this company.
+#}
+
+---
+
+## 4. Qualitative & Operational Considerations
+
+Based on the business description, sector and industry:
+
+- Identify **sector-specific risks** (e.g., cyclicality, regulation, tech disruption).
+- Identify **business model risks** that may affect payment behavior and the stability of the receivables pool.
+- Highlight any **operational or competitive red flags** found in the description.
+
+Focus on **how these aspects can impact receivables risk** (default rates, dilution, concentration, etc.).
+
+---
+
+## 5. Data Quality & Limitations
+
+List **explicitly** any missing or clearly inconsistent metrics (for example:
+equity equal to zero, liabilities equal to zero but the company is clearly leveraged, zero cash flow data, etc.)
+and how this affects confidence in the analysis.
+
+---
+
+## 6. Final Risk Assessment for Receivables
+
+Provide a **final, technical opinion** on the risk of purchasing/accepting receivables from this company.
+
+- **Global risk rating (1–5):** (choose a number and justify)
+- **Risk level label:** (*Low*, *Moderate*, or *High* credit risk)
+
+In your conclusion, include:
+
+1. A one-paragraph **executive summary** (very objective).
+2. 3–5 **bullet points** with the main quantitative arguments (ratios and metrics above).
+3. 2–3 **bullet points** with qualitative/sector considerations.
+4. A clear statement such as:  
+   - *“Overall, the company presents **low** credit risk for receivables-based transactions.”*  
+   - *“Overall, the company presents **moderate** credit risk for receivables-based transactions.”*  
+   - *“Overall, the company presents **high** credit risk for receivables-based transactions.”*
+
+Do **not** invent data. If something is not available in the metrics above,
+assume it is unknown and explicitly mention that.
+"""

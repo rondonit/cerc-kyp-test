@@ -1,6 +1,7 @@
 import logging
 import time
 import ollama
+from data_normalization import normalize_company_data
 from template_engine import render_template
 
 logger = logging.getLogger(__name__)
@@ -9,16 +10,12 @@ logger = logging.getLogger(__name__)
 def run_risk_agent(
     company_data: dict,
     ratios: dict,
-    template_name: str = "risk_template.jinja",
+    template_name: str = "report_template.jinja",
     model: str = "gemma3:latest",
 ) -> str:
+    company = normalize_company_data(company_data)
     variables = {
-        "company_name": company_data["company_name"],
-        "company_ticker": company_data["company_ticker"],
-        "sector": company_data.get("sector"),
-        "industry": company_data.get("industry"),
-        "website": company_data.get("website"),
-        "description": company_data.get("description"),
+        "company": company,
         "ratios": ratios,
     }
     logger.debug("Renderizando template %s", template_name)
@@ -27,7 +24,7 @@ def run_risk_agent(
 
     # Simplificado: não usamos streaming. Apenas indicar que o relatório está sendo gerado.
     print(
-        f"Gerando relatório de risco para {company_data.get('company_name')} ({company_data.get('company_ticker')})..."
+        f"Gerando relatório de risco para {company.get('company_name')} ({company.get('company_ticker')})..."
     )
 
     start = time.time()
