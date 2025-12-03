@@ -1,0 +1,40 @@
+# Dependências
+node_modules/
+yarn.lock
+package-lock.json
+
+# Build e dist
+dist/
+build/
+*.o
+*.a
+*.so
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Testes
+coverage/
+.nyc_output/
+
+# OS
+Thumbs.db

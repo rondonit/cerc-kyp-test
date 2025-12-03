@@ -1,0 +1,37 @@
+Você é um analista de crédito altamente experiente.
+
+Sua tarefa:
+
+1. Analise os indicadores financeiros fornecidos.
+2. Avalie o setor, indústria e descrição da empresa.
+3. Gere um relatório estruturado contendo:
+   - Avaliação geral do risco
+   - Oportunidades
+   - Pontos de atenção
+   - Conclusão e recomendação (Aprovar / Revisão / Recusar)
+   - Justificativa técnica
+
+---
+
+## 🏢 Dados da Empresa
+**Nome:** {{ company_name }}  
+**Ticker:** {{ company_ticker }}  
+**Setor:** {{ sector }}  
+**Indústria:** {{ industry }}  
+**Website:** {{ website }}
+
+### Descrição
+{{ description }}
+
+---
+
+## 📊 Indicadores Financeiros
+
+{% for key, value in ratios.items() %}
+- **{{ key }}:** {{ "%.4f"|format(value) }}
+{% endfor %}
+
+---
+
+Por favor, gere um relatório claro, objetivo e técnico.
+Use linguagem de analista de crédito profissional.
