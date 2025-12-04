@@ -1,0 +1,38 @@
+{
+    "company_ticker": "KO",
+    "company_name": "The Coca-Cola Company",
+    "currency": "USD",
+    "location": {
+        "address": "One Coca-Cola Plaza",
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30313",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Consumer Defensive",
+        "industry": "Beverages - Non-Alcoholic",
+        "website": "https://www.coca-colacompany.com",
+        "description": "The Coca-Cola Company, a beverage company, manufactures and sells various nonalcoholic beverages in the United States and internationally. The company provides sparkling soft drinks and flavors; water, sports, coffee, and tea; juice, value-added dairy, and plant-based beverages; and other beverages. It also offers beverage concentrates and syrups, as well as fountain syrups to fountain retailers comprising restaurants and convenience stores. The company sells its products under the Coca-Cola, Diet Coke/Coca-Cola Light, Coca-Cola Zero Sugar, caffeine free Diet Coke, Cherry Coke, Fanta Orange, Fanta Zero Orange, Fanta Zero Sugar, Fanta Apple, Sprite, Sprite Zero Sugar, Simply Orange, Simply Apple, Simply Grapefruit, Fresca, Schweppes, Thums Up, Aquarius, Ayataka, BODYARMOR, Ciel, Costa, Crystal, Dasani, dogadan, Fuze Tea, Georgia, glac\u00e9au smartwater, glac\u00e9au vitaminwater, Gold Peak, I LOHAS, Powerade, Topo Chico, Core Power, Del Valle, fairlife, innocent, Maaza, Minute Maid, Minute Maid Pulpy, and Simply brands. It operates through a network of independent bottling partners, distributors, wholesalers, and retailers, as well as through bottling and distribution operators. The company was founded in 1886 and is headquartered in Atlanta, Georgia."
+    },
+    "ratios": {
+        "total_assets": 100549000000.0,
+        "total_liabilities": 74177000000.0,
+        "total_equity": 26372000000.0,
+        "current_assets": 25997000000.0,
+        "current_liabilities": 25249000000.0,
+        "total_revenue": 47061000000.0,
+        "net_income": 10631000000.0,
+        "operating_cash_flow": 6805000000.0
+    },
+    "metrics": {
+        "market_cap": 304742662144,
+        "enterprise_value": 338394710016,
+        "trailing_pe": 23.44702,
+        "forward_pe": 23.84175,
+        "dividend_yield": 2.89,
+        "beta": 0.398,
+        "52_week_high": 74.38,
+        "52_week_low": 60.62
+    }
+}

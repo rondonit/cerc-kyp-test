@@ -1,0 +1,38 @@
+{
+    "company_ticker": "MGLU3.SA",
+    "company_name": "Magazine Luiza S.A.",
+    "currency": "BRL",
+    "location": {
+        "address": "Rua VoluntArios da, no 1.465",
+        "city": "Franca",
+        "state": "SP",
+        "zip": "",
+        "country": "Brazil"
+    },
+    "business": {
+        "sector": "Consumer Cyclical",
+        "industry": "Specialty Retail",
+        "website": "https://www.magazineluiza.com.br",
+        "description": "Magazine Luiza S.A. engages in the retail sale of consumer goods. It operates through Retail, Financial Operations, Insurance Operations, and Other Services segments. The company also grants credit and provides extended warranties for its products. In addition, it is involved in the provision of consortium and management services; and e-commerce of perfumes, cosmetics, sports, and fashion products, as well as product delivery management and software development services. Further, the company provides integration, logistics, and technological solutions, as well as resale goods and provision of services in the stores, electronic and food delivery management platform. It serves through physical stores, e-commerce platform, and SuperApp. Magazine Luiza S.A. was founded in 1957 and is headquartered in Franca, Brazil. Magazine Luiza S.A. operates as a subsidiary of LTD Administra\u00e7\u00e3o e Participa\u00e7\u00e3o S.A."
+    },
+    "ratios": {
+        "total_assets": 37311858000.0,
+        "total_liabilities": 25992596000.0,
+        "total_equity": 11319262000.0,
+        "current_assets": 19550824000.0,
+        "current_liabilities": 16710550000.0,
+        "total_revenue": 38038068000.0,
+        "net_income": 448717000.0,
+        "operating_cash_flow": 15835331000.0
+    },
+    "metrics": {
+        "market_cap": 8291823616,
+        "enterprise_value": 15740353536,
+        "trailing_pe": 22.48,
+        "forward_pe": 18.42623,
+        "dividend_yield": 2.88,
+        "beta": 1.38,
+        "52_week_high": 12.13,
+        "52_week_low": 5.71
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "company_ticker": "V",
+    "company_name": "Visa Inc.",
+    "currency": "USD",
+    "location": {
+        "address": "P.O. Box 8999",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94128-8999",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Financial Services",
+        "industry": "Credit Services",
+        "website": "https://www.visa.com",
+        "description": "Visa Inc. operates as a payment technology company in the United States and internationally. The company operates VisaNet, a transaction processing network that enables authorization, clearing, and settlement of payment transactions. It also offers credit, debit, and prepaid card products; tap to pay, tokenization, and click to pay services; Visa Direct, a platform which facilitates money movement, enabling clients to collect, hold, convert, and send funds across its network; and issuing solutions, such as airport lounge access, dining reservations, shopping experiences, event tickets, and seller offers. In addition, the company provides acceptance solutions, an omnichannel payment integration with e-commerce platforms; risk detection and prevention solutions; and advisory and other services comprising consulting practice, proprietary analytics models, data scientists and economists, marketing services, and managed services. It provides its services under the Visa, Visa Electron, V PAY, Interlink, and PLUS brands. The company serves consumers, sellers, financial institutions, and government entities. Visa Inc. was founded in 1958 and is headquartered in San Francisco, California."
+    },
+    "ratios": {
+        "total_assets": 99627000000.0,
+        "total_liabilities": 61718000000.0,
+        "total_equity": 37909000000.0,
+        "current_assets": 37766000000.0,
+        "current_liabilities": 35048000000.0,
+        "total_revenue": 40000000000.0,
+        "net_income": 20058000000.0,
+        "operating_cash_flow": 23059000000.0
+    },
+    "metrics": {
+        "market_cap": 639753846784,
+        "enterprise_value": 638814126080,
+        "trailing_pe": 32.346416,
+        "forward_pe": 26.035543,
+        "dividend_yield": 0.81,
+        "beta": 0.82,
+        "52_week_high": 375.51,
+        "52_week_low": 299.0
+    }
+}

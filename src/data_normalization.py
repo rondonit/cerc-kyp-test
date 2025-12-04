@@ -1,9 +1,5 @@
-from typing import Any, Dict
-
-"""
-Helpers to normalize raw company payloads into the structure expected by the
-Jinja report template.
-"""
+from typing import Any, Dict, Tuple
+from .utils import _coerce_float, _calculate_reliability
 
 METRIC_KEYS = [
     "total_assets",
@@ -17,32 +13,35 @@ METRIC_KEYS = [
 ]
 
 
-def _coerce_float(value: Any) -> float:
-    try:
-        return float(value)
-    except Exception:
-        return 0.0
-
-
-def normalize_company_data(raw: Dict[str, Any]) -> Dict[str, Any]:
+def normalize_company_data(raw: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """
-    Flatten and sanitize the company payload so the template always receives
-    the expected keys.
+    Cleans and normalizes raw company data. Returns normalized data
+    and reliability metadata.
+    Returns:
+        company_data: dict - Normalized company data.
+        reliability_metadata: dict - Metadata about data reliability.
     """
-    business = raw.get("business") or {}
-    metrics_raw = raw.get("metrics") or {}
+    business = raw.get("business") or {}  # avoid None
+    ratios_raw = raw.get("ratios") or {}  # evita None
 
-    metrics = {key: _coerce_float(metrics_raw.get(key, 0.0)) for key in METRIC_KEYS}
+    # compute reliability score before calculating ratios
+    reliability_score, missing_metrics = _calculate_reliability(ratios_raw, METRIC_KEYS)
+    ratios = {key: _coerce_float(ratios_raw.get(key, 0.0)) for key in METRIC_KEYS}
 
     company = {
-        "company_name": raw.get("company_name") or raw.get("name") or raw.get("ticker"),
-        "company_ticker": raw.get("company_ticker") or raw.get("ticker"),
+        "company_name": raw.get("company_name"),
+        "company_ticker": raw.get("company_ticker"),
         "currency": raw.get("currency"),
-        "sector": raw.get("sector") or business.get("sector"),
-        "industry": raw.get("industry") or business.get("industry"),
-        "website": raw.get("website") or business.get("website"),
-        "description": raw.get("description") or business.get("description"),
-        "metrics": metrics,
+        "location": raw.get("location"),
+        "business": business,
+        "ratios": ratios,
+        "metrics": raw.get("metrics"),  # metrics are raw financial values
     }
 
-    return company
+    metadata = {
+        "data_reliability_score": reliability_score,
+        "missing_metrics": missing_metrics,
+        "notes": "A pontuação de confiabilidade é baseada na disponibilidade e validade das métricas financeiras esperadas.",
+    }
+
+    return company, metadata

@@ -1,0 +1,38 @@
+{
+    "company_ticker": "XOM",
+    "company_name": "Exxon Mobil Corporation",
+    "currency": "USD",
+    "location": {
+        "address": "22777 Springwoods Village Parkway",
+        "city": "Spring",
+        "state": "TX",
+        "zip": "77389-1425",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Energy",
+        "industry": "Oil & Gas Integrated",
+        "website": "https://corporate.exxonmobil.com",
+        "description": "Exxon Mobil Corporation engages in the exploration and production of crude oil and natural gas in the United States, Guyana, Canada, the United Kingdom, Singapore, France, and internationally. It operates through Upstream, Energy Products, Chemical Products, and Specialty Products segments. The Upstream segment explores for and produces crude oil and natural gas. The Energy Products segment offers fuels, aromatics, and catalysts, as well as licensing services. The Chemical Products segment manufactures and sells petrochemicals, including olefins, polyolefins, and intermediates. The Specialty Products segment offers performance products, including finished lubricants, basestocks, waxes, synthetics, elastomers, and resins. It also involved in the manufacture, trading, transportation, and sale of crude oil, natural gas, petroleum products, petrochemicals, and other specialty products; and pursuit of lower-emission and business opportunities, including carbon capture and storage, hydrogen, lower-emission fuels, Proxxima systems, carbon materials, and lithium. In addition, the company offers sustainable aviation fuel. It sells its products under the Exxon, Esso, and Mobil brands. Exxon Mobil Corporation was founded in 1870 and is headquartered in Spring, Texas."
+    },
+    "ratios": {
+        "total_assets": 453475000000.0,
+        "total_liabilities": 182869000000.0,
+        "total_equity": 270606000000.0,
+        "current_assets": 91990000000.0,
+        "current_liabilities": 70307000000.0,
+        "total_revenue": 339247000000.0,
+        "net_income": 33680000000.0,
+        "operating_cash_flow": 55022000000.0
+    },
+    "metrics": {
+        "market_cap": 502210527232,
+        "enterprise_value": 522460561408,
+        "trailing_pe": 17.122093,
+        "forward_pe": 14.968234,
+        "dividend_yield": 3.57,
+        "beta": 0.378,
+        "52_week_high": 120.81,
+        "52_week_low": 97.8
+    }
+}

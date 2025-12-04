@@ -1,0 +1,38 @@
+{
+    "company_ticker": "NFLX",
+    "company_name": "Netflix, Inc.",
+    "currency": "USD",
+    "location": {
+        "address": "121 Albright Way",
+        "city": "Los Gatos",
+        "state": "CA",
+        "zip": "95032",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Communication Services",
+        "industry": "Entertainment",
+        "website": "https://www.netflix.com",
+        "description": "Netflix, Inc. provides entertainment services. The company offers television (TV) series, documentaries, feature films, and games across various genres and languages. It also provides members the ability to receive streaming content through a host of internet-connected devices, including TVs, digital video players, TV set-top boxes, and mobile devices. The company operates approximately in 190 countries. Netflix, Inc. was incorporated in 1997 and is headquartered in Los Gatos, California."
+    },
+    "ratios": {
+        "total_assets": 53630374000.0,
+        "total_liabilities": 28886807000.0,
+        "total_equity": 24743567000.0,
+        "current_assets": 13100379000.0,
+        "current_liabilities": 10755400000.0,
+        "total_revenue": 39000966000.0,
+        "net_income": 8711631000.0,
+        "operating_cash_flow": 7361364000.0
+    },
+    "metrics": {
+        "market_cap": 440512118784,
+        "enterprise_value": 471110451200,
+        "trailing_pe": 43.497906,
+        "forward_pe": 4.371741,
+        "dividend_yield": null,
+        "beta": 1.703,
+        "52_week_high": 134.115,
+        "52_week_low": 82.11
+    }
+}

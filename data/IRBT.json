@@ -1,0 +1,38 @@
+{
+    "company_ticker": "IRBT",
+    "company_name": "iRobot Corporation",
+    "currency": "USD",
+    "location": {
+        "address": "8 Crosby Drive",
+        "city": "Bedford",
+        "state": "MA",
+        "zip": "01730",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Consumer Cyclical",
+        "industry": "Furnishings, Fixtures & Appliances",
+        "website": "https://www.irobot.com",
+        "description": "iRobot Corporation designs, builds, and sells robots and home innovation products in the United States, Europe, the Middle East, Africa, Japan, and internationally. The company offers Roomba Combo 10 Max robot + AutoWash Dock, a robot vacuum and mop that vacuum and mop multiple floor types while the dock automatically refills and recharges the robot, washes and dries the mopping pad, empties debris, and self-cleans; and Roomba Combo which performs both mopping and vacuuming. It also provides Roomba floor vacuuming robots; accessories and consumables, such as the Clean Base Automatic Dirt Disposal system, replacement dirt disposal bags, mop pads, floor cleaning solution, filters, brushes, and other replacement parts; and service plans for floorcare robots, including an option to cover accidental damage, as well as subscription services. The company sells its products through chain stores and other national retailers, value- added distributors, and resellers, as well as through its website and app, and e-commerce websites. iRobot Corporation was incorporated in 1990 and is headquartered in Bedford, Massachusetts."
+    },
+    "ratios": {
+        "total_assets": 516137000.0,
+        "total_liabilities": 454898000.0,
+        "total_equity": 61239000.0,
+        "current_assets": 288502000.0,
+        "current_liabilities": 218244000.0,
+        "total_revenue": 681849000.0,
+        "net_income": -145518000.0,
+        "operating_cash_flow": -33222000.0
+    },
+    "metrics": {
+        "market_cap": 107890832,
+        "enterprise_value": 256031408,
+        "trailing_pe": null,
+        "forward_pe": -2.275168,
+        "dividend_yield": null,
+        "beta": 1.188,
+        "52_week_high": 13.06,
+        "52_week_low": 1.4
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "company_ticker": "VALE3.SA",
+    "company_name": "Vale S.A.",
+    "currency": "BRL",
+    "location": {
+        "address": "Praia de Botafogo 186",
+        "city": "Rio De Janeiro",
+        "state": "RJ",
+        "zip": "22250-145",
+        "country": "Brazil"
+    },
+    "business": {
+        "sector": "Basic Materials",
+        "industry": "Other Industrial Metals & Mining",
+        "website": "https://vale.com",
+        "description": "Vale S.A., together with its subsidiaries, produces iron ore and nickel in Asia, the Americas, Europe, and internationally. It operates through Iron Solutions and Energy Transition Materials segments. The company extracts and produces iron ore, iron ore pellets, briquettes, and other ferrous products; provides logistic related services; and operates mining complexes, railways, maritime terminals, and ports. It also produces nickel, copper, and cobalt, as well as by-products, such as gold, silver, platinum group metals, and other precious metals. In addition, the company engages in greenfield mineral exploration; invests in energy businesses through renewable sources; and operates pelletizing plants and distribution centers to support the delivery of iron ore. The company was formerly known as Companhia Vale do Rio Doce and changed its name to Vale S.A. in May 2009. Vale S.A. was founded in 1942 and is headquartered in Rio De Janeiro, Brazil."
+    },
+    "ratios": {
+        "total_assets": 80152000000.0,
+        "total_liabilities": 45624000000.0,
+        "total_equity": 34528000000.0,
+        "current_assets": 13481000000.0,
+        "current_liabilities": 13090000000.0,
+        "total_revenue": 38056000000.0,
+        "net_income": 6166000000.0,
+        "operating_cash_flow": 9366000000.0
+    },
+    "metrics": {
+        "market_cap": 301760086016,
+        "enterprise_value": 379357069312,
+        "trailing_pe": 10.230102,
+        "forward_pe": 5.920436,
+        "dividend_yield": 11.89,
+        "beta": 0.906,
+        "52_week_high": 71.1,
+        "52_week_low": 48.77
+    }
+}

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  risk-analyzer-api:
+    image: cerc-kyp-app-compose
+    build: . 
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    entrypoint: ["gunicorn", "--bind", "0.0.0.0:8000", "api:app"]
+    ports:
+      - "8000:8000" 
+
+  
+  risk-analyzer-cli:
+    image: cerc-kyp-app-compose
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    

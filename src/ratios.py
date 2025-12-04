@@ -1,8 +1,5 @@
 from typing import Any, Dict
-
-
-def _safe_div(numerator: float, denominator: float) -> float:
-    return numerator / denominator if denominator else 0.0
+from .utils import _safe_div
 
 
 def compute_ratios(company_data: Dict[str, Any]) -> Dict[str, float]:
@@ -10,16 +7,17 @@ def compute_ratios(company_data: Dict[str, Any]) -> Dict[str, float]:
     Compute the ratios used by the risk template. Returns 0.0 when denominators
     are zero or missing.
     """
-    metrics = company_data.get("metrics", {})
+    # extract necessary metrics from company data for ratio calculations
+    ratios_data = company_data.get("ratios", {})
 
-    total_assets = float(metrics.get("total_assets", 0.0) or 0.0)
-    total_liabilities = float(metrics.get("total_liabilities", 0.0) or 0.0)
-    total_equity = float(metrics.get("total_equity", 0.0) or 0.0)
-    current_assets = float(metrics.get("current_assets", 0.0) or 0.0)
-    current_liabilities = float(metrics.get("current_liabilities", 0.0) or 0.0)
-    total_revenue = float(metrics.get("total_revenue", 0.0) or 0.0)
-    net_income = float(metrics.get("net_income", 0.0) or 0.0)
-    operating_cash_flow = float(metrics.get("operating_cash_flow", 0.0) or 0.0)
+    total_assets = float(ratios_data.get("total_assets", 0.0) or 0.0)  # evita None
+    total_liabilities = float(ratios_data.get("total_liabilities", 0.0) or 0.0)
+    total_equity = float(ratios_data.get("total_equity", 0.0) or 0.0)
+    current_assets = float(ratios_data.get("current_assets", 0.0) or 0.0)
+    current_liabilities = float(ratios_data.get("current_liabilities", 0.0) or 0.0)
+    total_revenue = float(ratios_data.get("total_revenue", 0.0) or 0.0)
+    net_income = float(ratios_data.get("net_income", 0.0) or 0.0)
+    operating_cash_flow = float(ratios_data.get("operating_cash_flow", 0.0) or 0.0)
 
     ratios = {
         # Liquidity

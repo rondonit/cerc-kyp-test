@@ -1,0 +1,38 @@
+{
+    "company_ticker": "BA",
+    "company_name": "The Boeing Company",
+    "currency": "USD",
+    "location": {
+        "address": "929 Long Bridge Drive",
+        "city": "Arlington",
+        "state": "VA",
+        "zip": "22202-4208",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Industrials",
+        "industry": "Aerospace & Defense",
+        "website": "https://www.boeing.com",
+        "description": "The Boeing Company, together with its subsidiaries, designs, develops, manufactures, sells, services, and supports commercial jetliners, military aircraft, satellites, missile defense, human space flight and launch systems, and services worldwide. The company operates through three segments: Commercial Airplanes; Defense, Space & Security; and Global Services. The Commercial Airplanes segment develops, produces, and markets commercial jet aircraft for passenger and cargo requirements. The Defense, Space & Security segment engages in the research, development, production, and modification of manned and unmanned military aircraft and weapons systems; strategic defense and intelligence systems, which include strategic missile and defense systems, command, control, communications, computers, intelligence, surveillance and reconnaissance, cyber and information solutions, and intelligence systems; and satellite systems, such as government and commercial satellites, and space exploration. The Global Services segment offers products and services, including supply chain and logistics management, engineering, maintenance and modifications, upgrades and conversions, spare parts, pilot and maintenance training systems and services, technical and maintenance documents, and data analytics and digital services to commercial and defense customers. The Boeing Company was incorporated in 1916 and is based in Arlington, Virginia."
+    },
+    "ratios": {
+        "total_assets": 156363000000.0,
+        "total_liabilities": 160277000000.0,
+        "total_equity": -3914000000.0,
+        "current_assets": 127998000000.0,
+        "current_liabilities": 97078000000.0,
+        "total_revenue": 66517000000.0,
+        "net_income": -11817000000.0,
+        "operating_cash_flow": -12080000000.0
+    },
+    "metrics": {
+        "market_cap": 153949732864,
+        "enterprise_value": 189539401728,
+        "trailing_pe": null,
+        "forward_pe": 430.93616,
+        "dividend_yield": null,
+        "beta": 1.17,
+        "52_week_high": 242.69,
+        "52_week_low": 128.88
+    }
+}

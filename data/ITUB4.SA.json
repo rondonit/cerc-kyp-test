@@ -1,0 +1,38 @@
+{
+    "company_ticker": "ITUB4.SA",
+    "company_name": "Ita\u00fa Unibanco Holding S.A.",
+    "currency": "BRL",
+    "location": {
+        "address": "PraCa Alfredo Egydio de Souza Aranha",
+        "city": "S\u00e3o Paulo",
+        "state": "SP",
+        "zip": "04344-902",
+        "country": "Brazil"
+    },
+    "business": {
+        "sector": "Financial Services",
+        "industry": "Banks - Regional",
+        "website": "https://www.itau.com.br",
+        "description": "Ita\u00fa Unibanco Holding S.A. provides various financial products and services to personal and corporate customers in Brazil and internationally. It operates through three segments: Retail Banking, Wholesale Banking, and Activities with the Market + Corporation. The company offers current account; loans; credit and debit cards; investment and commercial banking services; real estate lending and financing services; economic, financial and brokerage advisory; and leasing and foreign exchange services. The company also provides non-life insurance products covering loss, damage, or liability for objects or people, as well as life insurance products covering death and personal accidents. It serves retail customers, account and non-account holders, individuals and legal entities, high income clients, microenterprises, and small companies, as well as middle-market companies and high net worth institutional clients. The company was formerly known as Ita\u00fa Unibanco Banco M\u00faltiplo S.A. and changed its name to Ita\u00fa Unibanco Holding S.A. in April 2009. The company was incorporated in 1924 and is headquartered in S\u00e3o Paulo, Brazil. Ita\u00fa Unibanco Holding S.A. is a subsidiary of IUPAR - Ita\u00fa Unibanco Participa\u00e7\u00f5es S.A."
+    },
+    "ratios": {
+        "total_assets": 2854475000000.0,
+        "total_liabilities": 2633191000000.0,
+        "total_equity": 221284000000.0,
+        "current_assets": 0.0,
+        "current_liabilities": 0.0,
+        "total_revenue": 158568000000.0,
+        "net_income": 41085000000.0,
+        "operating_cash_flow": 7069000000.0
+    },
+    "metrics": {
+        "market_cap": 451994583040,
+        "enterprise_value": 1041495097344,
+        "trailing_pe": 10.322739,
+        "forward_pe": 9.118791,
+        "dividend_yield": 7.33,
+        "beta": 0.144,
+        "52_week_high": 42.46,
+        "52_week_low": 27.10909
+    }
+}

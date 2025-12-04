@@ -1,0 +1,38 @@
+{
+    "company_ticker": "PFE",
+    "company_name": "Pfizer Inc.",
+    "currency": "USD",
+    "location": {
+        "address": "66 Hudson Boulevard East",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10001-2192",
+        "country": "United States"
+    },
+    "business": {
+        "sector": "Healthcare",
+        "industry": "Drug Manufacturers - General",
+        "website": "https://www.pfizer.com",
+        "description": "Pfizer Inc. discovers, develops, manufactures, markets, distributes, and sells biopharmaceutical products in the United States and internationally. The company offers medicines and vaccines in various therapeutic areas, including cardiovascular and migraine under the Eliquis, Nurtec ODT/Vydura, Zavzpret, and the Premarin family brands; infectious diseases with unmet medical needs under the Prevnar family, Abrysvo, Nimenrix, FSME/IMMUN-TicoVac, and Trumenba brands; and COVID-19 prevention and treatment, and potential future mRNA and antiviral products under the Comirnaty and Paxlovid brands. It also provides medicines and vaccines in various therapeutic areas, such as biosimilars for chronic immune and inflammatory diseases under the Xeljanz, Enbrel, Inflectra, Litfulo, Velsipity, and Cibinqo brands; amyloidosis, hemophilia, endocrine diseases, and sickle cell disease under the Vyndaqel family, Oxbryta, BeneFIX, Somavert, Ngenla, and Genotropin brands; sterile injectable and anti-infective medicines under the Sulperazon, Medrol, Zavicefta, Zithromax, Octagam, and Panzyga brands; and biologics, small molecules, immunotherapies, and biosimilars under the Ibrance, Xtandi, Padcev, Adcetris, Inlyta, Lorbrena, Bosulif, Tukysa, Braftovi, Mektovi, Orgovyx, Elrexfio, Tivdak, and Talzenna brands. In addition, the company involved in the contract manufacturing business. It serves wholesalers, retailers, hospitals, clinics, government agencies, pharmacies, individual provider offices, retail pharmacies, and integrated delivery systems. The company has collaboration agreements with Bristol-Myers Squibb Company; Astellas Pharma US, Inc.; Merck KGaA; and BioNTech SE. Pfizer Inc. was founded in 1849 and is headquartered in New York, New York."
+    },
+    "ratios": {
+        "total_assets": 213396000000.0,
+        "total_liabilities": 124899000000.0,
+        "total_equity": 88497000000.0,
+        "current_assets": 50358000000.0,
+        "current_liabilities": 42995000000.0,
+        "total_revenue": 63627000000.0,
+        "net_income": 8031000000.0,
+        "operating_cash_flow": 12744000000.0
+    },
+    "metrics": {
+        "market_cap": 145383538688,
+        "enterprise_value": 190242537472,
+        "trailing_pe": 14.866279,
+        "forward_pe": 8.726962,
+        "dividend_yield": 6.84,
+        "beta": 0.425,
+        "52_week_high": 27.69,
+        "52_week_low": 20.92
+    }
+}
