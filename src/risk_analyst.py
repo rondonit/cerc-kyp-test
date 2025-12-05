@@ -93,7 +93,7 @@ def _run_openrouter_agent(
 def get_risk_agent(provider: str):
     if provider == "gemini":
         return _run_gemini_agent
-    elif provider == "openrouter":
-        return _run_openrouter_agent
-    else:
+    elif provider == "ollama":
         return _run_ollama_agent
+    else:
+        return _run_openrouter_agent

@@ -9,7 +9,7 @@ def analyze_ticket_and_return_md(ticker: str) -> Response:
     model = request.args.get("model", "gemini")
     try:
         report = run_complete_analysis(ticker=ticker, model_provider=model)
-        return Response(report, mimetype="text/markdown")  # return markdown content directly
+        return Response(report, mimetype="text/html")
     except FileNotFoundError:
         response = jsonify({"detail": f"Dados para o ticket '{ticker}' não encontrados."})
         response.status_code = 404
