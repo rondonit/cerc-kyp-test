@@ -9,7 +9,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Pipeline de geração de relatório de risco.")
     parser.add_argument(
         "--model",
-        choices=["ollama", "gemini"],
+        choices=["ollama", "gemini", "openrouter"],
         default="gemini",
         help="Escolhe qual provider de modelo de IA usar.",
     )
