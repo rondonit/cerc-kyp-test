@@ -41,18 +41,18 @@ def main() -> None:
     args = parse_args()
 
     try:
-        report_content = run_complete_analysis(ticker=args.ticket, model_provider=args.model)
+        report_content = run_complete_analysis(ticker=args.ticker, model_provider=args.model)
 
         out_dir = Path("reports")
         out_dir.mkdir(parents=True, exist_ok=True)
-        output_path_md = out_dir / f"{args.ticket}_risk_report_{args.model}.md"
+        output_path_md = out_dir / f"{args.ticker}_risk_report_{args.model}.md"
 
         with open(output_path_md, "w", encoding="utf-8") as f:
             f.write(report_content)
         print(f"Relatório Markdown salvo em {output_path_md}")
 
         if args.pdf:
-            pdf_path = out_dir / f"{args.ticket}_risk_report_{args.model}.pdf"
+            pdf_path = out_dir / f"{args.ticker}_risk_report_{args.model}.pdf"
             style = (
                 "h1, h2 { color: MidnightBlue; font-size: 0.9em; } "
                 "body { font-size: 0.85em; } "
@@ -70,7 +70,7 @@ def main() -> None:
             print(f"Relatório PDF salvo em {pdf_path}")
 
     except Exception as e:
-        print(f"Erro ao gerar o relatório para {args.ticket} com o modelo {args.model}: {e}")
+        print(f"Erro ao gerar o relatório para {args.ticker} com o modelo {args.model}: {e}")
 
 
 if __name__ == "__main__":
