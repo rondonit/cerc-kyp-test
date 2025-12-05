@@ -16,7 +16,7 @@ def _run_gemini_agent(
     ratios: dict,
     reliability_metadata: dict,
     template_name: str = "report_template.jinja",
-    model: str = "gemini-2.5-flash-lite",  # do not cghange the model here
+    model: str = "gemini-2.5-flash-lite",  # sem tokens
 ) -> str:
     variables = {
         "company": company_data,
@@ -69,6 +69,8 @@ def _run_openrouter_agent(
     }
 
     prompt = render_template(template_name, variables)
+
+    # request HTTP directly:
 
     headers = {"Authorization": f"Bearer {openrouter_api_key}", "Content-Type": "application/json"}
 

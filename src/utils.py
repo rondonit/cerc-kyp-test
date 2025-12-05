@@ -67,7 +67,7 @@ def get_value(data_source: pd.DataFrame | Dict, keys: List[str]) -> float:
                     continue  # Try next key
         return 0.0
 
-    # Handle Dictionary (info object)
+    # Handle Dictionary
     if isinstance(data_source, dict):
         for key in keys:
             value = data_source.get(key)

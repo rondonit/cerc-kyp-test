@@ -12,14 +12,11 @@ def fetch_company_data(company: str) -> Dict[str, Any]:
     """
     ticker = yf.Ticker(company)
 
-    # --- Extract ---
     balance_sheet = ticker.balance_sheet
     income_statement = ticker.financials
     cash_flow = ticker.cashflow
     info = ticker.info
 
-    # --- Transform ---
-    # Ratios (formerly metrics) are the core financial statement items
     ratios = {
         "total_assets": get_value(balance_sheet, ["Total Assets", "Total assets"]),
         "total_liabilities": get_value(
@@ -39,7 +36,6 @@ def fetch_company_data(company: str) -> Dict[str, Any]:
         ),
     }
 
-    # Location and Business data from the 'info' object
     location = {
         "address": info.get("address1", ""),
         "city": info.get("city", ""),
@@ -55,7 +51,6 @@ def fetch_company_data(company: str) -> Dict[str, Any]:
         "description": info.get("longBusinessSummary"),
     }
 
-    # New 'metrics' section with other relevant data from the 'info' object
     metrics = {
         "market_cap": info.get("marketCap"),
         "enterprise_value": info.get("enterpriseValue"),
@@ -67,7 +62,6 @@ def fetch_company_data(company: str) -> Dict[str, Any]:
         "52_week_low": info.get("fiftyTwoWeekLow"),
     }
 
-    # Assemble the final payload
     company_data: Dict[str, Any] = {
         "company_ticker": company,
         "company_name": info.get("longName", company),
