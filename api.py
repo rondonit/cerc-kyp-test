@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route("/analyze/<ticker>", methods=["POST"])
 def analyze_ticket_and_return_md(ticker: str) -> Response:
     model = request.args.get("model", "gemini")
-
+    language = request.args.get("language", "en")
     try:
         report = run_complete_analysis(ticker=ticker, model_provider=model)
         return Response(report, mimetype="text/markdown")  # return markdown content directly

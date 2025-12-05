@@ -6,6 +6,7 @@ from .template_engine import render_template
 
 load_dotenv()
 gemini_api_key = os.getenv("GEMINI_API_KEY")
+report_language = os.getenv("REPORT_LANGUAGE", "en")
 
 
 def _run_gemini_agent(
@@ -13,13 +14,14 @@ def _run_gemini_agent(
     ratios: dict,
     reliability_metadata: dict,
     template_name: str = "report_template.jinja",
-    model: str = "gemini-2.5-flash",  # do not cghange the model here
+    model: str = "gemini-flash-latest",  # do not cghange the model here
 ) -> str:
     variables = {
         "company": company_data,
         "ratios": ratios,
         "metrics": company_data.get("metrics", {}),
         "reliability": reliability_metadata,
+        "language": report_language,
     }
     prompt = render_template(template_name, variables)
     client = genai.Client(api_key=gemini_api_key)

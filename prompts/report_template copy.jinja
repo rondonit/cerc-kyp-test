@@ -1,0 +1,154 @@
+KYP_TECHNICAL_REPORT_TEMPLATE = r"""
+Você é um analista de **risco de crédito sênior** em uma empresa de infraestrutura de securitização e recebíveis.
+Sua tarefa é avaliar o **risco de crédito e operacional** de uma empresa, focando na segurança de
+comprar ou aceitar **recebíveis / duplicatas** originados por esta empresa.
+
+Siga estas regras estritamente:
+
+1.  **Seja altamente técnico e conciso.**
+2.  **Baseie sua opinião principalmente nas métricas quantitativas** fornecidas abaixo.
+3.  Use a **descrição do negócio** apenas como **contexto secundário** (modelo de negócio, setor, indústria).
+4.  **Sempre comente explicitamente sobre alavancagem, lucratividade e geração de caixa.**
+5.  Forneça uma **classificação de risco** clara no final (ex: *Baixo*, *Moderado*, *Alto*, ou *Inconclusivo* se a qualidade dos dados for muito baixa).
+6.  Se alguma métrica importante estiver ausente ou zero, **indique isso explicitamente** como uma limitação da qualidade dos dados e como isso afeta sua confiança na análise.
+
+---
+
+## 1. Visão Geral da Empresa
+
+-   **Nome:** {{ company.company_name }} ({{ company.company_ticker }})
+-   **Setor:** {{ company.business.sector or "N/A" }}
+-   **Indústria:** {{ company.business.industry or "N/A" }}
+-   **Moeda Principal:** {{ company.currency or "N/A" }}
+-   **Website:** {{ company.business.website or "N/A" }}
+-   **Localização:** {{ company.location.city }}, {{ company.location.state }}, {{ company.location.country }}
+
+**Descrição do Negócio (resumo):**
+{{ company.business.description or "Nenhuma descrição disponível." }}
+
+---
+
+## 2. Métricas Financeiras Brutas (Último Período Disponível)
+
+{% set r = company.ratios %}
+
+### 2.1 Balanço Patrimonial
+
+-   **Ativos totais:** {{ r.total_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+-   **Passivos totais:** {{ r.total_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+-   **Patrimônio líquido:** {{ r.total_equity | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+-   **Ativos circulantes:** {{ r.current_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+-   **Passivos circulantes:** {{ r.current_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+### 2.2 Demonstrativo de Resultados
+
+-   **Receita total:** {{ r.total_revenue | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+-   **Lucro líquido:** {{ r.net_income | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+### 2.3 Fluxo de Caixa
+
+-   **Fluxo de caixa operacional:** {{ r.operating_cash_flow | default(0.0) | round(2) }} {{ company.currency or "USD" }}
+
+### 2.4 Outras Métricas Relevantes
+
+{% set m = metrics %}
+
+-   **Capitalização de Mercado:** {{ m.market_cap | default("N/A") }}
+-   **Valor da Firma (Enterprise Value):** {{ m.enterprise_value | default("N/A") }}
+-   **P/L Trailing:** {{ m.trailing_pe | default("N/A") | round(2) }}
+-   **P/L Forward:** {{ m.forward_pe | default("N/A") | round(2) }}
+-   **Dividend Yield:** {% if m.dividend_yield is not none %}{{ (m.dividend_yield * 100) | round(2) }}%{% else %}N/A{% endif %}
+-   **Beta:** {{ m.beta | default("N/A") | round(2) }}
+-   **Máxima 52 Semanas:** {{ m["52_week_high"] | default("N/A") }}
+-   **Mínima 52 Semanas:** {{ m["52_week_low"] | default("N/A") }}
+
+---
+
+## 3. Indicadores Chave de Risco (Calculados)
+
+Use os indicadores abaixo como o **principal direcionador** de sua avaliação de risco.
+
+{% set r = ratios %} {# Agora 'ratios' vem pre-calculado #}
+
+### 3.1 Alavancagem
+
+-   **Dívida sobre Patrimônio:** {{ r.debt_to_equity_ratio | default("N/A") | round(2) }}
+-   **Ativos sobre Patrimônio (Alavancagem Financeira):** {{ r.assets_to_equity_ratio | default("N/A") | round(2) }}
+-   **Índice de Patrimônio Líquido (PL/Ativos):** {{ (r.equity_ratio * 100) | default("N/A") | round(2) }}%
+-   **Índice de Endividamento (Passivos/Ativos):** {{ (r.liabilities_ratio * 100) | default("N/A") | round(2) }}%
+
+**Análise técnica (alavancagem):**
+Explique, em termos técnicos, se a estrutura de capital indica risco de alavancagem baixo, moderado ou alto
+para investidores em recebíveis originados por esta empresa.
+
+---
+
+### 3.2 Rentabilidade
+
+-   **Margem Líquida:** {{ (r.net_margin * 100) | default("N/A") | round(2) }}%
+-   **Retorno sobre Ativos (ROA):** {{ (r.roa * 100) | default("N/A") | round(2) }}%
+-   **Retorno sobre Patrimônio Líquido (ROE):** {{ (r.roe * 100) | default("N/A") | round(2) }}%
+
+**Análise técnica (rentabilidade):**
+Discuta a rentabilidade em termos da capacidade de gerar lucros e absorver perdas de crédito,
+evitando comentários genéricos.
+
+---
+
+### 3.3 Geração de Caixa
+
+-   **Margem OCF (Fluxo de Caixa Operacional / Receita):** {{ (r.ocf_margin * 100) | default("N/A") | round(2) }}%
+-   **Cobertura de Passivos pelo OCF (OCF / Passivos Totais):** {{ r.ocf_to_liabilities | default("N/A") | round(2) }}
+
+**Análise técnica (geração de caixa):**
+Avalie a capacidade da empresa de gerar caixa para sustentar suas operações e pagar obrigações,
+enfatizando a capacidade de suportar programas de recebíveis / duplicatas.
+
+---
+
+## 4. Considerações Qualitativas e Operacionais
+
+Baseado na descrição do negócio, setor e indústria:
+
+-   Identifique **riscos específicos do setor** (ex: ciclicidade, regulação, disrupção tecnológica).
+-   Identifique **riscos do modelo de negócio** que possam afetar o comportamento de pagamento e a estabilidade do pool de recebíveis.
+-   Destaque quaisquer **sinalizadores vermelhos operacionais ou competitivos** encontrados na descrição.
+
+Concentre-se em **como esses aspectos podem impactar o risco de recebíveis** (taxas de inadimplência, diluição, concentração, etc.).
+
+---
+
+## 5. Qualidade e Limitações dos Dados
+
+**Pontuação de Confiabilidade dos Dados:** {{ reliability.data_reliability_score }}%
+**Métricas Financeiras Ausentes:** {% if reliability.missing_metrics %}{{ reliability.missing_metrics | join(', ') }}{% else %}Nenhuma{% endif %}
+**Observações:** Métricas financeiras ausentes foram consideradas como zero nos cálculos, o que pode impactar a precisão da análise.
+
+Explique **explicitamente** quaisquer métricas ausentes ou inconsistentes (por exemplo:
+patrimônio líquido igual a zero, passivos iguais a zero, mas a empresa é claramente alavancada, dados de fluxo de caixa zero, etc.)
+e como isso afeta a confiança na análise. Se a pontuação de confiabilidade for baixa, o risco "Inconclusivo" pode ser apropriado.
+
+---
+
+## 6. Avaliação Final de Risco para Recebíveis
+
+Forneça uma **opinião final e técnica** sobre o risco de comprar/aceitar recebíveis desta empresa.
+
+-   **Classificação de risco global (1–5):** (escolha um número e justifique)
+-   **Nível de risco:** (*Baixo*, *Moderado*, *Alto* risco de crédito, ou *Inconclusivo*)
+
+Em sua conclusão, inclua:
+
+1.  Um **resumo executivo** de um parágrafo (muito objetivo).
+2.  3–5 **tópicos** com os principais argumentos quantitativos (indicadores e métricas acima).
+3.  2–3 **tópicos** com considerações qualitativas/setoriais.
+4.  Uma declaração clara como:
+    -   *“No geral, a empresa apresenta **baixo** risco de crédito para transações baseadas em recebíveis.”*
+    -   *“No geral, a empresa apresenta **moderado** risco de crédito para transações baseadas em recebíveis.”*
+    -   *“No geral, a empresa apresenta **alto** risco de crédito para transações baseadas em recebíveis.”*
+    -   *“A análise é **inconclusiva** devido à baixa qualidade dos dados; mais informações são necessárias para uma avaliação precisa.”*
+
+**Não invente dados.** Se algo não estiver disponível nas métricas acima,
+assuma que é desconhecido e mencione isso explicitamente.
+"""

@@ -1,0 +1,38 @@
+{
+    "company_ticker": "PETR4",
+    "company_name": "PETR4",
+    "currency": null,
+    "location": {
+        "address": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+    },
+    "business": {
+        "sector": null,
+        "industry": null,
+        "website": null,
+        "description": null
+    },
+    "ratios": {
+        "total_assets": 0.0,
+        "total_liabilities": 0.0,
+        "total_equity": 0.0,
+        "current_assets": 0.0,
+        "current_liabilities": 0.0,
+        "total_revenue": 0.0,
+        "net_income": 0.0,
+        "operating_cash_flow": 0.0
+    },
+    "metrics": {
+        "market_cap": null,
+        "enterprise_value": null,
+        "trailing_pe": null,
+        "forward_pe": null,
+        "dividend_yield": null,
+        "beta": null,
+        "52_week_high": null,
+        "52_week_low": null
+    }
+}

@@ -1,154 +1,139 @@
 KYP_TECHNICAL_REPORT_TEMPLATE = r"""
-Você é um analista de **risco de crédito sênior** em uma empresa de infraestrutura de securitização e recebíveis.
-Sua tarefa é avaliar o **risco de crédito e operacional** de uma empresa, focando na segurança de
-comprar ou aceitar **recebíveis / duplicatas** originados por esta empresa.
+CREDIT RISK ANALYSIS INSTRUCTIONS
 
-Siga estas regras estritamente:
+You are a **Senior Credit Risk Analyst** responsible for producing technical reports to support decisions related to **acquiring/accepting receivables (invoices)** originated by a company.
 
-1.  **Seja altamente técnico e conciso.**
-2.  **Baseie sua opinião principalmente nas métricas quantitativas** fornecidas abaixo.
-3.  Use a **descrição do negócio** apenas como **contexto secundário** (modelo de negócio, setor, indústria).
-4.  **Sempre comente explicitamente sobre alavancagem, lucratividade e geração de caixa.**
-5.  Forneça uma **classificação de risco** clara no final (ex: *Baixo*, *Moderado*, *Alto*, ou *Inconclusivo* se a qualidade dos dados for muito baixa).
-6.  Se alguma métrica importante estiver ausente ou zero, **indique isso explicitamente** como uma limitação da qualidade dos dados e como isso afeta sua confiança na análise.
+Your task is to evaluate the **credit and operational risk** with priority on **quantitative financial indicators**.  
+Use business description only as **secondary qualitative context**.  
+**Do not fabricate information. Explicitly mention missing or uncertain metrics.**
+Use the following language this write this report: {{ language | default('en') }}
 
----
-
-## 1. Visão Geral da Empresa
-
--   **Nome:** {{ company.company_name }} ({{ company.company_ticker }})
--   **Setor:** {{ company.business.sector or "N/A" }}
--   **Indústria:** {{ company.business.industry or "N/A" }}
--   **Moeda Principal:** {{ company.currency or "N/A" }}
--   **Website:** {{ company.business.website or "N/A" }}
--   **Localização:** {{ company.location.city }}, {{ company.location.state }}, {{ company.location.country }}
-
-**Descrição do Negócio (resumo):**
-{{ company.business.description or "Nenhuma descrição disponível." }}
+### Mandatory rules:
+1. Use technical, objective, and professional language — **concise but detailed**.
+2. Base judgment mainly on **numerical metrics and ratios provided**.
+3. You must comment on:
+   - leverage and capital structure,
+   - profitability,
+   - cash generation and debt coverage.
+4. Highlight data quality and absence of metrics — this **affects confidence in conclusions**.
+5. Conclude with a **final risk classification and quantitative justification**.
+6. If data is insufficient → classify as **"Inconclusive"**.
+7. Never omit a metric — if unavailable, mark as *not reported* and discuss the impact.
 
 ---
 
-## 2. Métricas Financeiras Brutas (Último Período Disponível)
 
+REQUIRED OUTPUT FORMAT
+
+
+# 1. Company Identification & Context
+- **Company:** {{ company.company_name }} ({{ company.company_ticker }})
+- **Sector:** {{ company.business.sector or "N/A" }} | **Industry:** {{ company.business.industry or "N/A" }}
+- **Reporting Currency:** {{ company.currency or "N/A" }}
+- **Website:** {{ company.business.website or "N/A" }}
+- **Location:** {{ company.location.city }}, {{ company.location.state }}, {{ company.location.country }}
+
+**Short Operational Summary:**  
+→ {{ company.business.description or "No business description available." }}
+
+---
+
+# 2. Consolidated Quantitative Overview
 {% set r = company.ratios %}
+### 2.1 Balance Sheet
+| Metric | Value |
+|---|---|
+| Total Assets | {{ r.total_assets|default(0)|round(2) }} {{ company.currency }} |
+| Total Liabilities | {{ r.total_liabilities|default(0)|round(2) }} {{ company.currency }} |
+| Shareholder Equity | {{ r.total_equity|default(0)|round(2) }} {{ company.currency }} |
+| Current Assets | {{ r.current_assets|default(0)|round(2) }} {{ company.currency }} |
+| Current Liabilities | {{ r.current_liabilities|default(0)|round(2) }} {{ company.currency }} |
 
-### 2.1 Balanço Patrimonial
+### 2.2 Income Statement & Cash Flow
+| Total Revenue | Net Income | Operating Cash Flow (OCF) |
+|---|---|---|
+| {{ r.total_revenue|default(0)|round(2) }} | {{ r.net_income|default(0)|round(2) }} | {{ r.operating_cash_flow|default(0)|round(2) }} |
 
--   **Ativos totais:** {{ r.total_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
--   **Passivos totais:** {{ r.total_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
--   **Patrimônio líquido:** {{ r.total_equity | default(0.0) | round(2) }} {{ company.currency or "USD" }}
-
--   **Ativos circulantes:** {{ r.current_assets | default(0.0) | round(2) }} {{ company.currency or "USD" }}
--   **Passivos circulantes:** {{ r.current_liabilities | default(0.0) | round(2) }} {{ company.currency or "USD" }}
-
-### 2.2 Demonstrativo de Resultados
-
--   **Receita total:** {{ r.total_revenue | default(0.0) | round(2) }} {{ company.currency or "USD" }}
--   **Lucro líquido:** {{ r.net_income | default(0.0) | round(2) }} {{ company.currency or "USD" }}
-
-### 2.3 Fluxo de Caixa
-
--   **Fluxo de caixa operacional:** {{ r.operating_cash_flow | default(0.0) | round(2) }} {{ company.currency or "USD" }}
-
-### 2.4 Outras Métricas Relevantes
-
+### 2.3 Market & Valuation Metrics
 {% set m = metrics %}
-
--   **Capitalização de Mercado:** {{ m.market_cap | default("N/A") }}
--   **Valor da Firma (Enterprise Value):** {{ m.enterprise_value | default("N/A") }}
--   **P/L Trailing:** {{ m.trailing_pe | default("N/A") | round(2) }}
--   **P/L Forward:** {{ m.forward_pe | default("N/A") | round(2) }}
--   **Dividend Yield:** {% if m.dividend_yield is not none %}{{ (m.dividend_yield * 100) | round(2) }}%{% else %}N/A{% endif %}
--   **Beta:** {{ m.beta | default("N/A") | round(2) }}
--   **Máxima 52 Semanas:** {{ m["52_week_high"] | default("N/A") }}
--   **Mínima 52 Semanas:** {{ m["52_week_low"] | default("N/A") }}
+| Market Cap | Enterprise Value | Trailing P/E | Forward P/E | Dividend Yield | Beta | 52W High | 52W Low |
+|---|---|---|---|---|---|---|---|
+| {{ m.market_cap or "N/A" }} | {{ m.enterprise_value or "N/A" }} | {{ m.trailing_pe|default("N/A")|round(2) }} | {{ m.forward_pe|default("N/A")|round(2) }} | {% if m.dividend_yield is not none %}{{ (m.dividend_yield*100)|round(2) }}%{% else %}N/A{% endif %} | {{ m.beta|default("N/A")|round(2) }} | {{ m["52_week_high"] or "N/A" }} | {{ m["52_week_low"] or "N/A" }} |
 
 ---
 
-## 3. Indicadores Chave de Risco (Calculados)
+# 3. Key Risk Indicators (decision drivers)
 
-Use os indicadores abaixo como o **principal direcionador** de sua avaliação de risco.
+{% set r = ratios %}
+### 3.1 Leverage & Capital Structure
+| Ratio | Value |
+|---|---|
+| Debt-to-Equity | {{ r.debt_to_equity_ratio|default("N/A")|round(2) }} |
+| Assets-to-Equity (Leverage) | {{ r.assets_to_equity_ratio|default("N/A")|round(2) }} |
+| Equity Ratio (Equity/Assets) | {{ (r.equity_ratio*100)|default("N/A")|round(2) }}% |
+| Liabilities Ratio (Liabilities/Assets) | {{ (r.liabilities_ratio*100)|default("N/A")|round(2) }}% |
 
-{% set r = ratios %} {# Agora 'ratios' vem pre-calculado #}
-
-### 3.1 Alavancagem
-
--   **Dívida sobre Patrimônio:** {{ r.debt_to_equity_ratio | default("N/A") | round(2) }}
--   **Ativos sobre Patrimônio (Alavancagem Financeira):** {{ r.assets_to_equity_ratio | default("N/A") | round(2) }}
--   **Índice de Patrimônio Líquido (PL/Ativos):** {{ (r.equity_ratio * 100) | default("N/A") | round(2) }}%
--   **Índice de Endividamento (Passivos/Ativos):** {{ (r.liabilities_ratio * 100) | default("N/A") | round(2) }}%
-
-**Análise técnica (alavancagem):**
-Explique, em termos técnicos, se a estrutura de capital indica risco de alavancagem baixo, moderado ou alto
-para investidores em recebíveis originados por esta empresa.
+**Technical Commentary:** Assess leverage level and capital structure resiliency for receivables exposure.
 
 ---
 
-### 3.2 Rentabilidade
+### 3.2 Profitability
+| Net Margin | ROA | ROE |
+|---|---|---|
+| {{ (r.net_margin*100)|default("N/A")|round(2) }}% | {{ (r.roa*100)|default("N/A")|round(2) }}% | {{ (r.roe*100)|default("N/A")|round(2) }}% |
 
--   **Margem Líquida:** {{ (r.net_margin * 100) | default("N/A") | round(2) }}%
--   **Retorno sobre Ativos (ROA):** {{ (r.roa * 100) | default("N/A") | round(2) }}%
--   **Retorno sobre Patrimônio Líquido (ROE):** {{ (r.roe * 100) | default("N/A") | round(2) }}%
-
-**Análise técnica (rentabilidade):**
-Discuta a rentabilidade em termos da capacidade de gerar lucros e absorver perdas de crédito,
-evitando comentários genéricos.
+**Technical Commentary:** Evaluate earning performance, ability to absorb credit losses, and operational sustainability.
 
 ---
 
-### 3.3 Geração de Caixa
+### 3.3 Cash Generation & Debt Coverage
+| OCF Margin | OCF-to-Liabilities |
+|---|---|
+| {{ (r.ocf_margin*100)|default("N/A")|round(2) }}% | {{ r.ocf_to_liabilities|default("N/A")|round(2) }} |
 
--   **Margem OCF (Fluxo de Caixa Operacional / Receita):** {{ (r.ocf_margin * 100) | default("N/A") | round(2) }}%
--   **Cobertura de Passivos pelo OCF (OCF / Passivos Totais):** {{ r.ocf_to_liabilities | default("N/A") | round(2) }}
-
-**Análise técnica (geração de caixa):**
-Avalie a capacidade da empresa de gerar caixa para sustentar suas operações e pagar obrigações,
-enfatizando a capacidade de suportar programas de recebíveis / duplicatas.
+**Technical Commentary:** Assess recurring cash generation and capacity to honor obligations and receivables programs.
 
 ---
 
-## 4. Considerações Qualitativas e Operacionais
+# 4. Operational & Contextual Risk Assessment
+- Sector/regulation/market cyclicality risks:
+- Business model vulnerabilities:
+- Operational or competitive red flags identified:
 
-Baseado na descrição do negócio, setor e indústria:
-
--   Identifique **riscos específicos do setor** (ex: ciclicidade, regulação, disrupção tecnológica).
--   Identifique **riscos do modelo de negócio** que possam afetar o comportamento de pagamento e a estabilidade do pool de recebíveis.
--   Destaque quaisquer **sinalizadores vermelhos operacionais ou competitivos** encontrados na descrição.
-
-Concentre-se em **como esses aspectos podem impactar o risco de recebíveis** (taxas de inadimplência, diluição, concentração, etc.).
+*Each item must connect to receivables risk (default, dilution, concentration, recovery performance).*
 
 ---
 
-## 5. Qualidade e Limitações dos Dados
+# 5. Data Quality & Reliability Assessment
 
-**Pontuação de Confiabilidade dos Dados:** {{ reliability.data_reliability_score }}%
-**Métricas Financeiras Ausentes:** {% if reliability.missing_metrics %}{{ reliability.missing_metrics | join(', ') }}{% else %}Nenhuma{% endif %}
-**Observações:** Métricas financeiras ausentes foram consideradas como zero nos cálculos, o que pode impactar a precisão da análise.
+**Data Reliability Score:** {{ reliability.data_reliability_score }}%  
+**Missing Metrics:** {{ reliability.missing_metrics|join(', ') if reliability.missing_metrics else "None" }}
 
-Explique **explicitamente** quaisquer métricas ausentes ou inconsistentes (por exemplo:
-patrimônio líquido igual a zero, passivos iguais a zero, mas a empresa é claramente alavancada, dados de fluxo de caixa zero, etc.)
-e como isso afeta a confiança na análise. Se a pontuação de confiabilidade for baixa, o risco "Inconclusivo" pode ser apropriado.
+Explain:
+- Which gaps weaken the analysis?
+- How reliable is the assessment based on available data?
+- If critical data is missing → consider *Inconclusive* classification.
 
 ---
 
-## 6. Avaliação Final de Risco para Recebíveis
+# 6. Final Credit Risk Conclusion
 
-Forneça uma **opinião final e técnica** sobre o risco de comprar/aceitar recebíveis desta empresa.
+**Global Score (1–5):** _justify numerically_  
+**Risk Rating:** **Low / Moderate / High / Inconclusive**
 
--   **Classificação de risco global (1–5):** (escolha um número e justifique)
--   **Nível de risco:** (*Baixo*, *Moderado*, *Alto* risco de crédito, ou *Inconclusivo*)
+### Executive Summary (1 paragraph):
+→ Straightforward, data-driven recap of risk profile.
 
-Em sua conclusão, inclua:
+### Key Quantitative Drivers (3–5 bullet points):
+- ...
+- ...
+- ...
 
-1.  Um **resumo executivo** de um parágrafo (muito objetivo).
-2.  3–5 **tópicos** com os principais argumentos quantitativos (indicadores e métricas acima).
-3.  2–3 **tópicos** com considerações qualitativas/setoriais.
-4.  Uma declaração clara como:
-    -   *“No geral, a empresa apresenta **baixo** risco de crédito para transações baseadas em recebíveis.”*
-    -   *“No geral, a empresa apresenta **moderado** risco de crédito para transações baseadas em recebíveis.”*
-    -   *“No geral, a empresa apresenta **alto** risco de crédito para transações baseadas em recebíveis.”*
-    -   *“A análise é **inconclusiva** devido à baixa qualidade dos dados; mais informações são necessárias para uma avaliação precisa.”*
+### Supporting Qualitative Factors (2–3 bullet points):
+- ...
+- ...
 
-**Não invente dados.** Se algo não estiver disponível nas métricas acima,
-assuma que é desconhecido e mencione isso explicitamente.
+**Mandatory closing statement:**
+> *Overall, the company presents **(rating)** credit risk for receivables-backed transactions.*
+
 """

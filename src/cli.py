@@ -14,7 +14,7 @@ def parse_args() -> argparse.Namespace:
         help="Escolhe qual provider de modelo de IA usar.",
     )
     parser.add_argument(
-        "--ticket",
+        "--ticker",
         type=str,
         required=True,
         help="O ticker da empresa para a qual gerar o relatório (ex: AAPL, MSFT).",
@@ -23,6 +23,13 @@ def parse_args() -> argparse.Namespace:
         "--pdf",
         action="store_true",
         help="Gera o Risk Report em PDF junto com o Markdown.",
+    )
+    parser.add_argument(
+        "--language",
+        type=str,
+        choices=["en", "pt-br", "zh-CN"],
+        default="en",
+        help="Define o idioma do relatório gerado.",
     )
     return parser.parse_args()
 

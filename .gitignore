@@ -38,3 +38,21 @@ coverage/
 
 # OS
 Thumbs.db
+
+#n8n folder
+.n8n/
+n8n_data/
+
+# Python
+__pycache__/
+*.pyc
+src/__pycache__/*
+src/*.pyc
+venv/
+.env/
+.venv/
+# pycache
+__pycache__/
+*.py[cod]
+*$py.class
+# distribution / packaging
