@@ -58,17 +58,17 @@ uv run -m src.cli --ticket <TICKER> --model <MODELO> [--pdf]
 ```
 
 **Argumentos:**
-*   `--ticket <TICKER>`: **(Obrigatório)** O código da ação da empresa (ex: `AAPL`, `PETR4.SA`).
+*   `--ticker <TICKER>`: **(Obrigatório)** O código da ação da empresa (ex: `AAPL`, `PETR4.SA`).
 *   `--model <MODELO>`: **(Opcional)** O modelo de IA a ser usado (`gemini` ou `ollama`). Padrão: `gemini`.
 *   `--pdf`: **(Opcional)** Gera uma versão em PDF do relatório.
 
 **Exemplos:**
 ```bash
 # Analisar a Apple com Gemini e gerar relatórios em MD e PDF
-uv run -m src.cli --ticket AAPL --model gemini --pdf
+uv run -m src.cli --ticker AAPL --model gemini --pdf
 
 # Analisar a Petrobras com Gemini (apenas MD)
-uv run -m src.cli --ticket PETR4.SA --model gemini
+uv run -m src.cli --ticker PETR4.SA --model gemini
 ```
 
 Para processar várias empresas de uma vez, execute o script `fetch_all.sh`:
@@ -132,10 +132,5 @@ Além do fluxo básico, foram adicionadas funcionalidades para aumentar a robust
 
 ## Próximos Passos (Possíveis Melhorias)
 
-Como este é um MVP, existem várias avenidas para evolução e produção:
-
 -   [x] **Expor via API RESTful (com Flask):** Implementado para permitir a integração com outros sistemas, como o n8n. Para documentação interativa da API, pode-se considerar a integração com bibliotecas como Flask-RESTX.
 -   [x] **Containerização com Docker:** A aplicação agora está empacotada em um contêiner Docker para facilitar o deploy e garantir consistência em qualquer ambiente.
--   [ ] **Adicionar Testes:** Implementar testes unitários para as funções de utilitários e de transformação, e testes de integração para o pipeline principal, garantindo a confiabilidade do código.
--   [ ] **Orquestração Avançada:** Para cenários com múltiplos pipelines ou maior complexidade, o orquestrador leve em Python poderia ser migrado para uma ferramenta como **Airflow** ou **Dagster**.
--   [ ] **Cache de Dados:** Implementar um sistema de cache mais robusto (como Redis) para os dados das empresas, evitando chamadas repetidas à API do Yahoo Finance.
